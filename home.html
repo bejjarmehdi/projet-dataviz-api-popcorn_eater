@@ -4,30 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
-    <title>Document</title>
+    <title>PopCorn Eater</title>
 </head>
 <body>
-    <!-- <header class="header">
-        <p class="title">Popcorn Eater</p>
-        <div class="horloge"></div>
-        <nav class="navbar">
-
-            <input type="search" name="search-film" id="search-film">
-            <a href="#" class="notif"></a>
-            <a href="#"></a>
-        </nav>
-    </header> -->
-    <!-- For more settings use the AutoHTML plugin tab ... --> 
- <svg class="rectangle-2" width="1440" height="100" viewBox="0 0 1440 100"  fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0 0H1440V100H0V0Z" fill="#0D0C11" fill-opacity="0.02"/>
-    <path d="M0.5 0.5H1439.5V99.5H0.5V0.5Z" stroke="#D8D8D8" stroke-opacity="0.45"/>
-</svg>
-
+    <header>
+        <div class="container-title">
+            <h1 class="title">Popcorn Eater</h1>
+            <div class="animated-date">
+                <p id="horloge"></p>
+                <p id="date"></p>
+            </div>
+        </div>
+        <div class="search-container">
+            <form>
+                <label for="movie-search">Search Movie:</label>
+                <input type="search" id="movie-search" name="mon-film">
+                <button> <img src="Images/loupe2.png" alt="Bouton de recherche"></button>
+            </form>
+        </div>
+    </header>
     <main>
-        <section class="films">
+        <section class="movie-card">
+
+        </section>
+        <section class="trailer">
 
         </section>
     </main>
-    <script src="app.js"></script>
+    <!--<script src="app.js"></script>-->
 </body>
 </html>
