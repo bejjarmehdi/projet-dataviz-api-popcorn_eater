@@ -1,5 +1,6 @@
 
 
+
 const options = {
     method: 'GET',
     headers: {
@@ -8,45 +9,37 @@ const options = {
     }
   }
   
-   fetch('https://api.themoviedb.org/3/discover/movie?include_adult=false&      include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_genres=99', options)
-    .then(response => response.json())
-    .then(json => dynamiqueCard(json))
-    .catch(err => console.error(err))
-
-
-function dynamiqueCard(json){
-    const film = json.results
+  async function fetchDataFilm(titreFilm) {
+    const reponse = await fetch(`https://api.themoviedb.org/3/search/movie?query=${titreFilm}&include_adult=false&language=en-US&page=1`, options)
+    const data = await reponse.json()
+    const film = data.results
+    
     genererfilm(film)
-  
+  }
+   
+
+
+function genererfilm(films){
+    console.log(films[0].original_title)
+    const article = document.querySelector(".films")
+
+    const titre = document.createElement("h1")
+    titre.innerText = films[0].overview
+
+    article.appendChild(titre)
 }
 
 
-async function genererfilm(film){
-    for(let i = 0 ; i < 5; i++){
-        const article = film[i]
-        const sectionFiches = document.querySelector(".films")
-        const filmElement = document.createElement("article")
-        // const response= await fetch(`https://image.tmdb.org/t/p/w500${article.poster_path}`,options)
-        // const img = await response.json()
 
-        // const imageElement = document.createElement("img")
-        // imageElement.src = img
 
-        const nomElement = document.createElement("h2")
-        nomElement.innerText = article.original_title
+//recuperer input avec un button 
+document.querySelector("button").addEventListener('click', ()  =>{
+    const inputElement = document.querySelector("#inputText")
+    const valeurInput = inputElement.value
+    console.log(valeurInput)
+    document.querySelector(".films").innerHTML = ""
+    fetchDataFilm(valeurInput)
 
-        const adultElement = document.createElement("p")
-        adultElement.innerText = `${article.adult != true ? "mineur okay" : "hohoho cochon-ne !"}`
+})
 
-        const dateElement = document.createElement("p")
-        dateElement.innerText = article.release_date
 
-    
-        sectionFiches.appendChild(filmElement)
-        // filmElement.appendChild(imageElement)
-        filmElement.appendChild(nomElement)
-        filmElement.appendChild(adultElement)
-        filmElement.appendChild(dateElement)
-    
-    }
-}
