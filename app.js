@@ -23,10 +23,12 @@ function genererfilm(films){
     console.log(films[0].original_title)
     const article = document.querySelector(".movie-card")
 
-    const titre = document.createElement("h1")
-    titre.innerText = films[0].overview
+    const description = document.createElement("h1")
+    description.innerText = films[0].overview
+    
 
-    article.appendChild(titre)
+    article.appendChild(description)
+    
 }
 
 
@@ -36,10 +38,38 @@ function genererfilm(films){
 document.querySelector("button").addEventListener('click', ()  =>{
     const inputElement = document.querySelector("#movie-search")
     const valeurInput = inputElement.value
+    event.preventDefault();
     console.log(valeurInput)
     document.querySelector(".movie-card").innerHTML = ""
     fetchDataFilm(valeurInput)
 
 })
+
+function hor() {
+  let temps = new Date()
+  let heures = temps.getHours()
+  let minutes = temps.getMinutes()
+  let secondes = temps.getSeconds()
+  if (heures < 10) {
+      heures = "0" + heures
+  }
+  if (minutes < 10) {
+      minutes = "0" + minutes
+  }
+  if (secondes < 10) {
+      secondes = "0" + secondes
+  }
+  let heureA = heures + ":" + minutes + ":" + secondes
+  document.getElementById('horloge').textContent = heureA;
+  setInterval("hor()",1000)
+}
+hor()
+function d(){
+let d = new Date();
+let e = d.toLocaleDateString();
+document.getElementById('date').textContent=e
+
+} 
+d()
 
 
