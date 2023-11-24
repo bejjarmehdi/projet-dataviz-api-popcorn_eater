@@ -21,7 +21,7 @@ const options = {
 
 function genererfilm(films){
     console.log(films[0].original_title)
-    const article = document.querySelector(".films")
+    const article = document.querySelector(".movie-card")
 
     const titre = document.createElement("h1")
     titre.innerText = films[0].overview
@@ -34,10 +34,10 @@ function genererfilm(films){
 
 //recuperer input avec un button 
 document.querySelector("button").addEventListener('click', ()  =>{
-    const inputElement = document.querySelector("#inputText")
+    const inputElement = document.querySelector("#movie-search")
     const valeurInput = inputElement.value
     console.log(valeurInput)
-    document.querySelector(".films").innerHTML = ""
+    document.querySelector(".movie-card").innerHTML = ""
     fetchDataFilm(valeurInput)
 
 })
