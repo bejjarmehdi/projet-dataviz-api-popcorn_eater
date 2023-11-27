@@ -1,7 +1,6 @@
+import { fetchGenreFilm, nomGenres } from "./affichageGenre.js";
 
-
-
-const options = {
+const options = {   //Options d'appel de l'api
     method: 'GET',
     headers: {
       accept: 'application/json',
@@ -9,67 +8,86 @@ const options = {
     }
   }
   
-  async function fetchDataFilm(titreFilm) {
-    const reponse = await fetch(`https://api.themoviedb.org/3/search/movie?query=${titreFilm}&include_adult=false&language=en-US&page=1`, options)
-    const data = await reponse.json()
-    const film = data.results
-    
-    genererfilm(film)
+async function fetchDataFilm(titreFilm) {  //Récupère les données d'un film sous forme de tableau
+  try {
+    const reponse = await fetch(`https://api.themoviedb.org/3/search/movie?query=${titreFilm}&include_adult=false&language=en-US&page=1`, options);
+    const data = await reponse.json();
+    const film = data.results;
+    genererfilm(film);
   }
-   
-
-
-function genererfilm(films){
-    console.log(films[0].original_title)
-    const article = document.querySelector(".movie-card")
-
-    const description = document.createElement("h1")
-    description.innerText = films[0].overview
-    
-
-    article.appendChild(description)
-    
+  catch (error){
+      alert("Mauvaise saisie");
+      console.error(error);
+  }
 }
 
+async function genererfilm(films){   //Exploite le tableau de données pour un seul film, et extrait les infos demandées
+  console.log(films[0].original_title);
+  const article = document.querySelector(".movie-card");
+  const allGenres = await fetchGenreFilm(options);
+  const genreFilm = nomGenres(allGenres,films[0].genre_ids);
+  
+    
+  const titre = document.createElement("h1");  //crée un élément HTML de manière dynamique
+  titre.innerText = films[0].title;
 
+  const release = document.createElement("h2");
+  release.innerText = `Date de sortie : ${films[0].release_date}`; 
+    
+  const note = document.createElement("h3");
+  note.innerText = `Note moyenne des spectateurs : ${films[0].vote_average} / 10`;
 
+  const synopsis = document.createElement("p");
+  synopsis.innerText = films[0].overview;
+
+  const genre = document.createElement("p");
+  genre.innerText = `Genre(s) du film : ${genreFilm.join(", ")}`
+    
+  article.appendChild(titre); //Permet de placer l'élément créé correctement dans la structure HTML
+  article.appendChild(release);
+  article.appendChild(note);
+  article.appendChild(synopsis);
+  article.appendChild(genre);
+    
+}
 
 //recuperer input avec un button 
-document.querySelector("button").addEventListener('click', ()  =>{
-    const inputElement = document.querySelector("#movie-search")
-    const valeurInput = inputElement.value
-    event.preventDefault();
-    console.log(valeurInput)
-    document.querySelector(".movie-card").innerHTML = ""
-    fetchDataFilm(valeurInput)
-
+document.querySelector("button").addEventListener('click', (evt)  =>{
+    const inputElement = document.querySelector("#movie-search");
+    const valeurInput = inputElement.value;
+    evt.preventDefault();  //Evite le rafraichissement immédiat - comportement par défaut de form
+    console.log(valeurInput);
+    document.querySelector(".movie-card").innerHTML = "";
+    fetchDataFilm(valeurInput);
 })
 
-function hor() {
-  let temps = new Date()
-  let heures = temps.getHours()
-  let minutes = temps.getMinutes()
-  let secondes = temps.getSeconds()
-  if (heures < 10) {
-      heures = "0" + heures
-  }
-  if (minutes < 10) {
-      minutes = "0" + minutes
-  }
-  if (secondes < 10) {
-      secondes = "0" + secondes
-  }
-  let heureA = heures + ":" + minutes + ":" + secondes
-  document.getElementById('horloge').textContent = heureA;
-  setInterval("hor()",1000)
-}
-hor()
-function d(){
-let d = new Date();
-let e = d.toLocaleDateString();
-document.getElementById('date').textContent=e
+// function hor() {
+//   let temps = new Date();
+//   let heures = temps.getHours();
+//   let minutes = temps.getMinutes();
+//   let secondes = temps.getSeconds();
+//     if (heures < 10) {
+//       heures = "0" + heures;
+//     }
+//     if (minutes < 10) {
+//       minutes = "0" + minutes;
+//     }
+//     if (secondes < 10) {
+//       secondes = "0" + secondes;
+//     }
+//   let heureA = heures + ":" + minutes + ":" + secondes;
+//   document.getElementById('horloge').textContent = heureA;
+//   setInterval("hor()",1000);
+// }
 
-} 
-d()
+// hor();
+
+// function affichageDate(){
+// let d = new Date();
+// let e = d.toLocaleDateString();
+// document.getElementById('date').textContent = e;
+// } 
+
+// affichageDate();
 
 
