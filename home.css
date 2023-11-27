@@ -5,7 +5,7 @@ body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Montserrat', sans-serif;
-	background-color:white;
+	background-image:url(./Images/popcorn.png);
 }
 
 header {
@@ -41,4 +41,7 @@ header {
 .movie-card {
 	display:flex;
 	flex-direction:column;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
 }

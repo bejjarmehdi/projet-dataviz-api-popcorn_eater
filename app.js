@@ -24,6 +24,8 @@ async function fetchDataFilm(titreFilm) {  //Récupère les données d'un film s
 async function genererfilm(films){   //Exploite le tableau de données pour un seul film, et extrait les infos demandées
   console.log(films[0].original_title);
   const article = document.querySelector(".movie-card");
+  const urlImage = "https://image.tmdb.org/t/p/w500";
+  article.style.backgroundImage = `url(${urlImage}${films[0].backdrop_path})`;
   const allGenres = await fetchGenreFilm(options);
   const genreFilm = nomGenres(allGenres,films[0].genre_ids);
   
@@ -62,32 +64,32 @@ document.querySelector("button").addEventListener('click', (evt)  =>{
 })
 
 // function hor() {
-//   let temps = new Date();
-//   let heures = temps.getHours();
-//   let minutes = temps.getMinutes();
-//   let secondes = temps.getSeconds();
+//     let temps = new Date();
+//     let heures = temps.getHours();
+//     let minutes = temps.getMinutes();
+//     let secondes = temps.getSeconds();
 //     if (heures < 10) {
-//       heures = "0" + heures;
-//     }
-//     if (minutes < 10) {
-//       minutes = "0" + minutes;
-//     }
-//     if (secondes < 10) {
-//       secondes = "0" + secondes;
-//     }
-//   let heureA = heures + ":" + minutes + ":" + secondes;
-//   document.getElementById('horloge').textContent = heureA;
-//   setInterval("hor()",1000);
-// }
+//         heures = "0" + heures;
+//       }
+//       if (minutes < 10) {
+//         minutes = "0" + minutes;
+//       }
+//       if (secondes < 10) {
+//        secondes = "0" + secondes;
+//       }
+//     let heureA = heures + ":" + minutes + ":" + secondes;
+//     document.getElementById('horloge').textContent = heureA;
+//     setInterval("hor()",1000);
+//  }
 
-// hor();
+//  hor();
 
-// function affichageDate(){
-// let d = new Date();
-// let e = d.toLocaleDateString();
-// document.getElementById('date').textContent = e;
-// } 
+//  function affichageDate(){
+//   let d = new Date();
+//   let e = d.toLocaleDateString();
+//   document.getElementById('date').textContent = e;
+//  } 
 
-// affichageDate();
+//  affichageDate();
 
 
