@@ -24,11 +24,14 @@ async function fetchDataFilm(titreFilm) {  //Récupère les données d'un film s
 
 async function genererfilm(films){   //Exploite le tableau de données pour un seul film, et extrait les infos demandées
   console.log(films[0].original_title);
-  const article = document.querySelector(".movie-card");
+  const section= document.querySelector(".movie-card");
   const urlImage = "https://image.tmdb.org/t/p/w500";
   article.style.backgroundImage = `url(${urlImage}${films[0].poster_path})`;
   const allGenres = await fetchGenreFilm(options);
   const genreFilm = nomGenres(allGenres,films[0].genre_ids);
+  const article = document.createElement("article")
+  article.style.backgroundImage = `url(${urlImage}${films[0].backdrop_path})`;
+
   
     
   const titre = document.createElement("h1");  //crée un élément HTML de manière dynamique
@@ -46,6 +49,7 @@ async function genererfilm(films){   //Exploite le tableau de données pour un s
   const genre = document.createElement("p");
   genre.innerText = `Genre(s) du film : ${genreFilm.join(", ")}`
     
+  section.appendChild(article)
   article.appendChild(titre); //Permet de placer l'élément créé correctement dans la structure HTML
   article.appendChild(release);
   article.appendChild(note);
