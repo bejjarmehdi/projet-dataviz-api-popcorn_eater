@@ -11,7 +11,11 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 }
-
+.btn{
+	border: none;
+	background: none;
+	cursor: pointer;
+}
 header {
 	background-color:rgba(14, 17, 29, 0);
 	display:flex;
@@ -63,16 +67,13 @@ main {
 }
 
 .movie-card {
-	height: 500px;
-	width: 500px;
-	/* background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat; */
 	
-}
-.movie-card article{
 	display:flex;
-	height: 100%;
+	display: inline-block;
+    width: 600px;
+    height: 400px;
+    padding: 5px;
+    border: 1px solid blue;
 	flex-direction:column;
 	/* justify-content: center; */
 	align-items: center;
