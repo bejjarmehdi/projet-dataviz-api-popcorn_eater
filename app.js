@@ -1,4 +1,4 @@
-import { fetchGenreFilm, nomGenres } from "./affichageGenre.js";
+import { fetchGenreFilm, nomGenres , fetchTrailer} from "./affichageGenre.js";
 import { hor, affichageDate} from "./horloge.js"
 
 function hor() {
@@ -57,11 +57,12 @@ async function genererfilm(films){   //Exploite le tableau de données pour un s
   console.log(films[0].original_title);
   const section= document.querySelector(".movie-card");
   const urlImage = "https://image.tmdb.org/t/p/w500";
-  article.style.backgroundImage = `url(${urlImage}${films[0].poster_path})`;
   const allGenres = await fetchGenreFilm(options);
   const genreFilm = nomGenres(allGenres,films[0].genre_ids);
+  const urlTrailer = await fetchTrailer(films[0].id,options)
+  console.log(urlTrailer)
+
   const article = document.createElement("article")
-  article.style.backgroundImage = `url(${urlImage}${films[0].backdrop_path})`;
 
   
     
@@ -71,8 +72,8 @@ async function genererfilm(films){   //Exploite le tableau de données pour un s
   const release = document.createElement("h2");
   release.innerText = `Date de sortie : ${films[0].release_date}`; 
     
-  const note = document.createElement("h3");
-  note.innerText = `Note moyenne des spectateurs : ${films[0].vote_average} / 10`;
+  const note = document.createElement("h2");
+  note.innerText = `Note moyenne des spectateurs : ${Math.round(films[0].vote_average * 10)/ 10} / 10`;
 
   const synopsis = document.createElement("p");
   synopsis.innerText = films[0].overview;
@@ -86,7 +87,27 @@ async function genererfilm(films){   //Exploite le tableau de données pour un s
   article.appendChild(note);
   article.appendChild(synopsis);
   article.appendChild(genre);
-    
+
+
+  if(films[0].poster_path){
+    article.style.backgroundImage = `url(${urlImage}${films[0].poster_path})`;
+  }else{
+    article.style.backgroundColor = "black"
+  }
+
+  if(urlTrailer){
+    const trailerFilm = document.createElement("iframe")
+    trailerFilm.width = "560";
+    trailerFilm.height = "315";
+    trailerFilm.src = urlTrailer;
+    trailerFilm.frameBorder = "0";
+    trailerFilm.allowFullscreen = true;
+    document.querySelector(".trailer").appendChild(trailerFilm)
+  } else {
+    const oopsMessage = document.createElement("p");
+    oopsMessage.innerText = "Oops! Aucune vidéo disponible.";
+    trailerContainer.appendChild(oopsMessage);
+  }
 }
 
 //recuperer input avec un button 
@@ -96,6 +117,7 @@ document.querySelector("button").addEventListener('click', (evt)  =>{
     evt.preventDefault();  //Evite le rafraichissement immédiat - comportement par défaut de form
     console.log(valeurInput);
     document.querySelector(".movie-card").innerHTML = "";
+    document.querySelector(".trailer").innerHTML = "";
     fetchDataFilm(valeurInput);
 })
 

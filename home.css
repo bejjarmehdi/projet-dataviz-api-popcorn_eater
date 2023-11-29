@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vina+Sans&display=swap');
 
 body {
 	max-width: 100%;
@@ -10,6 +11,8 @@ body {
 	background-position: right;
 	background-size: cover;
 	background-attachment: fixed;
+	font-family: "bebas neue", sans-serif;
+	
 }
 .btn{
 	border: none;
@@ -18,6 +21,7 @@ body {
 }
 header {
 	background-color:rgba(14, 17, 29, 0);
+	backdrop-filter: blur(10px);
 	display:flex;
 	flex-direction: column;
 	text-align: center;
@@ -55,18 +59,20 @@ main{
 	margin-top: 50px;
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
-
-}
-
-main {
-	display: grid;
-	grid-template-columns: 25% 50% 25%;
-	grid-template-rows: 25% 50% 25%;
-  
+	gap: 10px;
+	margin-bottom: 100px;
 }
 
 .movie-card {
+	
+	width: 700px;
+	display: inline-block;
+
+	/* background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat; */
 	
 	display:flex;
 	display: inline-block;
@@ -77,7 +83,6 @@ main {
 	flex-direction:column;
 	/* justify-content: center; */
 	align-items: center;
-	gap: 2;
 	border-radius: 10px;
 	border: 4px inset rgba(3, 2, 2, 0.39);
 	background-size: cover;
@@ -85,15 +90,31 @@ main {
 	background-repeat: no-repeat;
 }
 .movie-card article h1{
-	font-family: "bebas neue", sans-serif;
-	background: #FF0000;
+	background: transparent;
 	background: linear-gradient(to left, #FF0000 0%, #000000 100%);
+	backdrop-filter: blur(10px);
+	border-radius: 8px;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	font-size: 40px;
+	font-size: 50px;
 	
 }
 
 .movie-card article h2{
-	
+	 
+}
+.movie-card article p, .movie-card article h2 {
+	font-family: "poppins", sans-serif;
+	letter-spacing: 2px;
+	color: white;
+	background: transparent;
+	backdrop-filter: blur(10px);
+	border-radius: 8px;
+}
+.movie-card article h2{
+	font-size: 25px;
+}
+.trailer{
+	height: 100px;
+	background-color: #FF0000;
 }
