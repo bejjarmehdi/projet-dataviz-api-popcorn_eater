@@ -24,6 +24,3 @@ export function hor() {
   document.getElementById('date').textContent = e;
  } 
 
- 
-
-
