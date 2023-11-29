@@ -70,24 +70,22 @@ main{
 	width: 700px;
 	display: inline-block;
 
-	/* background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat; */
 	
+	
+}
+.movie-card article{
 	display:flex;
-	display: inline-block;
-    width: 600px;
-    height: 400px;
+   
     padding: 5px;
     border: 1px solid blue;
 	flex-direction:column;
-	/* justify-content: center; */
+	justify-content: center;
 	align-items: center;
 	border-radius: 10px;
 	border: 4px inset rgba(3, 2, 2, 0.39);
 	background-size: cover;
 	background-position: center;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat; 
 }
 .movie-card article h1{
 	background: transparent;
@@ -100,9 +98,6 @@ main{
 	
 }
 
-.movie-card article h2{
-	 
-}
 .movie-card article p, .movie-card article h2 {
 	font-family: "poppins", sans-serif;
 	letter-spacing: 2px;

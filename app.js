@@ -1,35 +1,6 @@
 import { fetchGenreFilm, nomGenres , fetchTrailer} from "./affichageGenre.js";
 import { hor, affichageDate} from "./horloge.js"
 
-function hor() {
-  let temps = new Date();
-  let heures = temps.getHours();
-  let minutes = temps.getMinutes();
-  let secondes = temps.getSeconds();
-  if (heures < 10) {
-      heures = "0" + heures;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    if (secondes < 10) {
-     secondes = "0" + secondes;
-    }
-  let heureA = heures + ":" + minutes + ":" + secondes;
-  document.getElementById('horloge').textContent = heureA;
-  
-}
-hor();
-setInterval(hor,1000);
-
-
-function affichageDate(){
-let d = new Date();
-let e = d.toLocaleDateString();
-document.getElementById('date').textContent = e;
-} 
-
-affichageDate();
 
 
 const options = {   //Options d'appel de l'api
